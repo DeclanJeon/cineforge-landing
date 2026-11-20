@@ -182,11 +182,12 @@ en/index.html    영어 문서 (lang="en", 영어 메타)
 
 ## 소셜 카드 (OG 이미지)
 
-`public/og.png`(1200×630)는 `scripts/og-card.html`을 실제로 렌더해서 만듭니다.
+`public/og.png`(1200×630)는 `scripts/og-card.html`을, `public/apple-touch-icon.png`(180×180)는
+`public/favicon.svg`를 실제로 렌더해서 만듭니다.
 페이지와 같은 폰트·색을 쓰기 때문에 미리보기가 사이트와 어긋나지 않습니다.
 
 ```bash
-npm run og        # scripts/make-og.mjs → public/og.png
+npm run assets    # scripts/make-assets.mjs → og.png + apple-touch-icon.png
 ```
 
 문구를 바꾸려면 `scripts/og-card.html`만 수정하고 다시 렌더하면 됩니다.

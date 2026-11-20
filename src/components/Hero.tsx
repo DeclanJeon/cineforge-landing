@@ -136,7 +136,12 @@ export function Hero() {
           swipe →
         </span>
         <div className="strip__perf" aria-hidden="true" />
-        <div className="strip__rail" role="list" aria-label={d.hero.stripLabel}>
+        <div
+          className="strip__rail"
+          role="list"
+          aria-label={d.hero.stripLabel}
+          tabIndex={0}
+        >
           {d.pipeline.stages.map((stage) => (
             <div
               className="strip__cell"

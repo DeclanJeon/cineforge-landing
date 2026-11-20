@@ -119,7 +119,9 @@ export function Gate() {
 
         <div className="gate__type" ref={typeRef} data-state="idle">
           <span className="gate__input mono">
-            <span className="gate__typing">{d.gate.typing}</span>
+            <span className="gate__typing" role="img">
+              {d.gate.typing}
+            </span>
             <span className="gate__caret" aria-hidden="true" />
           </span>
           <ul className="gate__checks">

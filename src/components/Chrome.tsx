@@ -95,7 +95,7 @@ export function Chrome() {
 
       <header className="nav" ref={navRef}>
         <div className="wrap nav__bar">
-          <a className="brand" href="#top" aria-label="CineForge 홈">
+          <a className="brand" href="#top">
             <Aperture />
             CineForge
             <span className="brand__sub">{d.nav.brandSub}</span>

@@ -15,7 +15,7 @@ export const ko = {
     skip: "본문으로",
     copy: "copy",
     copied: "copied",
-    copyLabel: "설치 명령 복사",
+    copyLabel: "복사 copy",
     langLabel: "언어",
     stageUnit: "stage",
   },

@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler@latest pages deploy dist --project-name cineforge --branch main",
-    "og": "node scripts/make-og.mjs"
+    "assets": "node scripts/make-assets.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -24,6 +24,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "axe-core": "^4.14.1",
     "oxlint": "^1.90.0",
     "puppeteer-core": "^25.18.1",
     "typescript": "~7.0.2",

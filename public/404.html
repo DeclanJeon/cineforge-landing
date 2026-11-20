@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 — CineForge</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#08090B" />
+    <style>
+      :root {
+        --ink: #08090b;
+        --paper: #efe9dd;
+        --amber: #e9a93e;
+        --muted: #a7adb4;
+        --line: rgba(239, 233, 221, 0.14);
+      }
+      * { margin: 0; box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: Pretendard, Archivo, system-ui, sans-serif;
+        line-height: 1.6;
+        word-break: keep-all;
+      }
+      main { width: min(100%, 34rem); }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--amber);
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin: 0.9rem 0 0.8rem;
+      }
+      p { color: var(--muted); }
+      .acts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 2rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid var(--line);
+      }
+      a {
+        color: var(--ink);
+        background: var(--paper);
+        text-decoration: none;
+        padding: 0.7rem 1.1rem;
+        border-radius: 2px;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      a + a {
+        color: var(--paper);
+        background: transparent;
+        border: 1px solid var(--line);
+      }
+      :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="mono">404 · footage missing</p>
+      <h1>이 장면은 편집에서 잘렸습니다.</h1>
+      <p>주소가 바뀌었거나 오타가 있을 수 있습니다. 파이프라인은 그대로 돌아갑니다.</p>
+      <div class="acts">
+        <a href="/">한국어 첫 화면</a>
+        <a href="/en/" hreflang="en" lang="en">English home</a>
+        <a href="https://github.com/DeclanJeon/cineforge" rel="noreferrer">GitHub</a>
+      </div>
+    </main>
+  </body>
+</html>

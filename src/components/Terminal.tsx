@@ -86,7 +86,9 @@ export function Terminal() {
                 {line.kind === "cmd" ? (
                   <>
                     <span className="term__prompt">$ </span>
-                    <span className="term__cmdtext">{line.text}</span>
+                    <span className="term__cmdtext" role="img">
+                      {line.text}
+                    </span>
                   </>
                 ) : (
                   line.text
