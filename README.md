@@ -79,31 +79,28 @@ npx wrangler login     # 브라우저 승인 (1회)
 npm run deploy         # build + pages deploy dist
 ```
 
-### GitHub Actions 자동 배포
+### 자동 배포 (토큰 없이 동작)
 
-`.github/workflows/deploy.yml`이 `main` 푸시마다 배포합니다. 지금은 `CLOUDFLARE_API_TOKEN`이
-없어서 "skipped"로 끝납니다. `CLOUDFLARE_ACCOUNT_ID`는 이미 secret으로 넣어 두었습니다.
-
-| 이름 | 종류 | 상태 |
-| --- | --- | --- |
-| `CLOUDFLARE_ACCOUNT_ID` | secret | ✅ `e84d5ee27e7b7e8fe46cb794c99a33fe` |
-| `VITE_CF_BEACON` | variable | ✅ Web Analytics 토큰 |
-| `CLOUDFLARE_API_TOKEN` | secret | ⬜ 대시보드에서만 만들 수 있음 (아래) |
-
-토큰은 OAuth 로그인으로는 만들 수 없습니다(Cloudflare가 토큰 발급 API를 막아 둡니다).
-한 번만 손으로 만들면 됩니다:
-
-1. <https://dash.cloudflare.com/profile/api-tokens> → **Create Token** → *Create Custom Token*
-2. Permissions: **Account → Cloudflare Pages → Edit**
-3. Account Resources: 본인 계정
-4. Create → 값 복사 → 아래 실행
+`origin/main`이 움직이면 이 기기의 **systemd user 타이머**가 10분 안에 빌드·배포합니다.
+`wrangler login`의 OAuth 세션을 그대로 쓰므로 Cloudflare API 토큰을 저장소 secret에
+넣지 않습니다.
 
 ```bash
-gh secret set CLOUDFLARE_API_TOKEN
+systemctl --user list-timers cineforge-landing-deploy.timer   # 다음 실행 시각
+systemctl --user start cineforge-landing-deploy.service       # 즉시 한 번
+tail -f .deploy.log                                           # 배포 로그
 ```
 
-넣은 뒤 `gh workflow run deploy.yml`로 한 번 확인하면, 이후로는 `main` 푸시와
-통계 동기화 커밋이 자동으로 배포됩니다.
+- 스크립트: `scripts/auto-deploy.sh` (유닛 파일은 `~/.config/systemd/user/`)
+- 동작: `git fetch` → `origin/main`이 마지막 배포 커밋과 다르면 fast-forward →
+  `npm run build` → `wrangler pages deploy dist`
+- 작업 트리에 커밋 안 된 변경이 있거나 로컬 `main`에 푸시 안 된 커밋이 있으면
+  **건드리지 않고 건너뜁니다**(로그에 남김)
+- 기기가 꺼져 있으면 다음 부팅에 따라잡습니다(`Persistent=true`)
+
+`.github/workflows/deploy.yml`도 남겨 뒀습니다. 나중에 클라우드에서만 돌리고 싶다면
+`gh secret set CLOUDFLARE_API_TOKEN`(권한: Account › Cloudflare Pages › Edit) 한 번이면
+GitHub Actions가 대신 배포합니다. `CLOUDFLARE_ACCOUNT_ID` secret은 이미 넣어 뒀습니다.
 
 SPA 라우팅이 필요 없습니다. `/`와 `/en/`은 각각 실제 HTML 파일이라 새로고침·공유가 안전합니다.
 
