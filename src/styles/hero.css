@@ -130,6 +130,20 @@
   font-weight: 500;
 }
 
+.hero__stars a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in oklab, var(--amber) 40%, transparent);
+  padding-bottom: 1px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.hero__stars a:hover,
+.hero__stars a:focus-visible {
+  color: var(--paper);
+  border-color: var(--amber);
+}
+
 .hero__facts span + span::before {
   content: "";
   width: 3px;
@@ -163,11 +177,10 @@
   }
 
   .hero__stars {
-  color: var(--amber);
-  font-weight: 500;
-}
+    color: var(--amber);
+  }
 
-.hero__facts span + span::before {
+  .hero__facts span + span::before {
     display: none;
   }
 }

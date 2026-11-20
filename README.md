@@ -115,20 +115,26 @@ Cloudflare Web Analytics(쿠키·배너 없음)를 씁니다. `cineforge-7ps.pag
 `.github/workflows/sync-stats.yml`이 매일 03:17 UTC(그리고 수동 실행·`repository_dispatch`)에
 `src/data/stats.json`을 갱신합니다. 갱신되면 커밋 → Pages 재배포 → 히어로 메타에 `★ N` 표시.
 
-1. PAT(권한: `repo` 읽기)을 만들어 이 저장소의 **Actions secret `STATS_TOKEN`** 으로 저장
-   - CineForge 본체가 private이라 익명 GitHub API로는 조회할 수 없습니다.
-2. secret이 없으면 워크플로는 조용히 0건으로 끝나고 기존 파일을 건드리지 않습니다.
-3. 별이 붙는 즉시 반영하고 싶다면 CineForge 쪽에서 이 저장소로
+1. **별·포크·워처·이슈 수는 secret 없이도 동작합니다** — 저장소가 공개라 익명 API로 충분합니다.
+2. `STATS_TOKEN`(PAT, `repo` 읽기)은 **선택**입니다. 넣으면 트래픽(`views14d`/`clones14d`)까지
+   채워지고, 없으면 그 두 값만 0으로 남습니다.
+3. 별이 붙은 즉시(수 분 내) 반영하고 싶다면 CineForge 쪽에서 이 저장소로
    `repository_dispatch`(`event_type: stats-updated`)를 보내면 됩니다.
 
-`stars`가 0이면 `★` 칩은 렌더되지 않습니다.
+`★` 칩은 항상 렌더됩니다(0이어도 표시). 사이트는 빌드에 박힌 값을 먼저 그리고,
+`src/lib/stats.ts`의 `useRepoStats()`가 공개 GitHub API(`/repos/DeclanJeon/cineforge`)를
+호출해 실제 값으로 덮어씁니다.
+
+- 방문자가 별을 누르면 **다음 방문(또는 탭 복귀)에서 바로** 반영됩니다. 재배포 불필요.
+- 응답은 `sessionStorage`에 1분 캐시 → 비인증 API 한도(시간당 60회/IP)를 아낍니다.
+- API가 막히면 빌드에 박힌 값이 그대로 남습니다(크롤러·JS 없는 방문자 포함).
 
 ## CTA 정책
 
-CineForge 저장소는 **비공개 베타**라 저장소·문서 직링크는 방문자에게 404가 됩니다.
-그래서 외부 링크는 GitHub 프로필(`https://github.com/DeclanJeon`) 하나만 두고
-"액세스 요청"으로 안내합니다. 공개로 전환하면 `Chrome.tsx`·`Closing.tsx`의 `CONTACT`
-상수를 저장소 URL로 바꾸고 보조 CTA를 문서 링크로 되돌리면 됩니다.
+CineForge 저장소는 **공개**입니다. 그래서 외부 링크는 전부 저장소
+(`https://github.com/DeclanJeon/cineforge`) 하나만 가리킵니다 — 내비 "저장소",
+마무리 주 CTA "GitHub에서 보기", 푸터 "GitHub 저장소", 히어로의 `★ N` 칩.
+URL은 `Chrome.tsx`·`Closing.tsx`의 `REPO`, 칩은 `src/lib/stats.ts`의 `repoUrl`에 있습니다.
 
 ## 동작 원칙
 

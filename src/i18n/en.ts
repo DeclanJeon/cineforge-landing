@@ -25,8 +25,8 @@ export const en: Dict = {
       { href: "#gate", label: "Approval" },
     ],
     brandSub: "orchestrator",
-    access: "Request access",
-    accessLabel: "Request early access (new window)",
+    access: "Repository",
+    accessLabel: "Open the GitHub repository (new window)",
     start: "Get started",
   },
   hero: {
@@ -279,11 +279,11 @@ export const en: Dict = {
     line1: "The next video,",
     line2: "decided once.",
     install: "install",
-    noteBefore: "The repository is in ",
-    noteStrong: "private beta",
+    noteBefore: "The repository is ",
+    noteStrong: "public",
     noteAfter:
-      ". Request access and you receive the install guide and the docs. Python 3.10+ · one dependency, PyYAML.",
-    ctaPrimary: "Request early access",
+      ". The docs and the install guide live there. Python 3.10+ · one dependency, PyYAML.",
+    ctaPrimary: "View on GitHub",
     ctaSecondary: "Revisit the pipeline",
   },
   footer: {
@@ -293,7 +293,7 @@ export const en: Dict = {
       { href: "#pipeline", label: "Pipeline" },
       { href: "#gate", label: "Approval" },
     ],
-    access: "Request access",
+    access: "GitHub repository",
     navLabel: "External links",
   },
 };

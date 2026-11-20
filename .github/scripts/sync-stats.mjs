@@ -1,26 +1,22 @@
 /**
- * Refresh `src/data/stats.json` from the private CineForge repository.
+ * Refresh `src/data/stats.json` from the CineForge repository.
  *
- * Needs a PAT with `repo` read access in `STATS_TOKEN`; without it the script
- * exits 0 and leaves the committed numbers alone, so forks and local runs of
- * the workflow never fail.
+ * The repository is public, so stars/forks/watchers/issues come from the
+ * unauthenticated API and the workflow works with no secret at all. A token
+ * (`STATS_TOKEN`, `repo` scope) is only needed for the traffic endpoints, which
+ * GitHub refuses to serve anonymously — without it those two numbers stay 0.
  */
 import { writeFile } from "node:fs/promises";
 
-const token = process.env.STATS_TOKEN;
+const token = process.env.STATS_TOKEN ?? "";
 const repo = process.env.STATS_REPO ?? "DeclanJeon/cineforge";
 const target = new URL("../../src/data/stats.json", import.meta.url);
 
-if (!token) {
-  console.log("STATS_TOKEN is not set — keeping the committed stats.json.");
-  process.exit(0);
-}
-
 const headers = {
-  authorization: `Bearer ${token}`,
   accept: "application/vnd.github+json",
   "user-agent": "cineforge-landing-stats",
   "x-github-api-version": "2022-11-28",
+  ...(token ? { authorization: `Bearer ${token}` } : {}),
 };
 
 const repoRes = await fetch(`https://api.github.com/repos/${repo}`, { headers });
@@ -31,6 +27,7 @@ if (!repoRes.ok) {
 const data = await repoRes.json();
 
 async function traffic(path) {
+  if (!token) return 0;
   const res = await fetch(`https://api.github.com/repos/${repo}/traffic/${path}`, {
     headers,
   });
@@ -49,4 +46,4 @@ const next = {
 };
 
 await writeFile(target, `${JSON.stringify(next, null, 2)}\n`);
-console.log(next);
+console.log(next, token ? "(with traffic)" : "(no STATS_TOKEN — traffic skipped)");

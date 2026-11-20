@@ -27,8 +27,8 @@ export const ko = {
       { href: "#gate", label: "승인" },
     ],
     brandSub: "orchestrator",
-    access: "액세스 요청",
-    accessLabel: "얼리 액세스 요청 (새 창)",
+    access: "저장소",
+    accessLabel: "GitHub 저장소 열기 (새 창)",
     start: "시작하기",
   },
   hero: {
@@ -39,7 +39,7 @@ export const ko = {
     accent: "논스톱.",
     lede: "CineForge는 콘셉트 조합부터 기획안·SSOT·에셋·검수·생성 인계까지 이어 주는 대화형 AI 영상 제작 오케스트레이터 CLI입니다. 요청문에 없는 것만, 처음에 한 번 묻습니다.",
     facts: ["v0.1.0", "python 3.10+", "15 stages · 3 gates", "51 tests"],
-    starsLabel: "GitHub 스타",
+    starsLabel: "GitHub 스타 수",
     ctaPrimary: "시작하기",
     ctaSecondary: "파이프라인 보기",
     stripLabel: "제작 단계",
@@ -278,10 +278,10 @@ export const ko = {
     line2: "한 번의 선택으로.",
     install: "install",
     noteBefore: "저장소는 ",
-    noteStrong: "비공개 베타",
+    noteStrong: "공개",
     noteAfter:
-      "입니다. 액세스를 요청하면 설치 안내와 문서를 함께 받습니다. Python 3.10+ · 의존성 PyYAML 하나.",
-    ctaPrimary: "얼리 액세스 요청",
+      "되어 있습니다. 문서와 설치 안내도 그대로 들어 있습니다. Python 3.10+ · 의존성 PyYAML 하나.",
+    ctaPrimary: "GitHub에서 보기",
     ctaSecondary: "파이프라인 다시 보기",
   },
   footer: {
@@ -291,7 +291,7 @@ export const ko = {
       { href: "#pipeline", label: "파이프라인" },
       { href: "#gate", label: "승인" },
     ],
-    access: "액세스 요청",
+    access: "GitHub 저장소",
     navLabel: "바깥 링크",
   },
 };

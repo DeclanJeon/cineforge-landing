@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "../lib/gsap";
 import { ArrowDown, ArrowRight } from "./Icons";
 import { useDict } from "../i18n";
-import { stats } from "../lib/stats";
+import { repoUrl, useRepoStats } from "../lib/stats";
 
 export function Hero() {
   const d = useDict();
+  const stats = useRepoStats();
   const rootRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
@@ -104,11 +105,17 @@ export function Hero() {
               {d.hero.facts.map((fact) => (
                 <span key={fact}>{fact}</span>
               ))}
-              {stats.stars > 0 ? (
-                <span className="hero__stars" title={d.hero.starsLabel}>
+              <span className="hero__stars">
+                <a
+                  href={repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={d.hero.starsLabel}
+                  aria-label={`${d.hero.starsLabel} — ${stats.stars}`}
+                >
                   ★ {stats.stars}
-                </span>
-              ) : null}
+                </a>
+              </span>
             </p>
             <div className="hero__cta">
               <a className="btn btn--solid" href="#start">

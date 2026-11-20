@@ -3,7 +3,7 @@ import { gsap, SplitText, useGSAP } from "../lib/gsap";
 import { useDict } from "../i18n";
 import { ArrowRight, CheckIcon, CopyIcon, GitHubIcon } from "./Icons";
 
-const CONTACT = "https://github.com/DeclanJeon";
+const REPO = "https://github.com/DeclanJeon/cineforge";
 const INSTALL = 'pip install -e ".[dev]"';
 
 /** Clipboard API needs a focused, secure document; fall back for the rest. */
@@ -112,7 +112,7 @@ export function Closing() {
             <div className="closing__actions">
               <a
                 className="btn btn--solid"
-                href={CONTACT}
+                href={REPO}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -136,7 +136,7 @@ export function Closing() {
               {link.label}
             </a>
           ))}
-          <a href={CONTACT} target="_blank" rel="noreferrer">
+          <a href={REPO} target="_blank" rel="noreferrer">
             {d.footer.access}
           </a>
         </nav>

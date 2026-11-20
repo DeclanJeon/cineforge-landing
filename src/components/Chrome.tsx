@@ -3,7 +3,7 @@ import { gsap, ScrollTrigger, useGSAP } from "../lib/gsap";
 import { LANG_PATH, lang, useDict } from "../i18n";
 import { Aperture, ArrowRight, GitHubIcon } from "./Icons";
 
-const CONTACT = "https://github.com/DeclanJeon";
+const REPO = "https://github.com/DeclanJeon/cineforge";
 
 function timecode(progress: number) {
   const fps = 24;
@@ -127,7 +127,7 @@ export function Chrome() {
             </div>
             <a
               className="btn btn--ghost btn--sm nav__access"
-              href={CONTACT}
+              href={REPO}
               target="_blank"
               rel="noreferrer"
               aria-label={d.nav.accessLabel}
