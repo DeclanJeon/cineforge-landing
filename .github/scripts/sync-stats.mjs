@@ -20,6 +20,12 @@ const headers = {
 };
 
 const repoRes = await fetch(`https://api.github.com/repos/${repo}`, { headers });
+if (repoRes.status === 403 || repoRes.status === 429) {
+  // Shared-runner IPs burn the anonymous limit fast. Keep the committed numbers
+  // instead of failing: the live value on the page comes from the browser.
+  console.warn(`GitHub rate-limited the request (${repoRes.status}) — keeping stats.json.`);
+  process.exit(0);
+}
 if (!repoRes.ok) {
   console.error(`GitHub API returned ${repoRes.status} for ${repo}`);
   process.exit(1);
