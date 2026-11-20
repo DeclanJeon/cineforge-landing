@@ -165,3 +165,7 @@ en/index.html    영어 문서 (lang="en", 영어 메타)
 - 시맨틱 헤딩(h1→h2→h3), 건너뛰기 링크, `:focus-visible` 링, 언어 전환 링크에 `hrefLang`.
 - 본문 대비는 `--paper-dim #d6d0c4` / `--muted #a7adb4` / `--faint #8a9199`(6:1+).
 - 1440·1024·768·390에서 가로 오버플로 0, 두 언어 모두 콘솔 에러 0으로 확인했습니다.
+
+## 라이선스
+
+[MIT](LICENSE) © 2026 Declan Jeon
