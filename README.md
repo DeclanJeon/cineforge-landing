@@ -81,16 +81,29 @@ npm run deploy         # build + pages deploy dist
 
 ### GitHub Actions 자동 배포
 
-`.github/workflows/deploy.yml`이 `main` 푸시마다 배포합니다. 아래 두 개가 있어야 동작하고,
-없으면 워크플로가 조용히 건너뜁니다.
+`.github/workflows/deploy.yml`이 `main` 푸시마다 배포합니다. 지금은 `CLOUDFLARE_API_TOKEN`이
+없어서 "skipped"로 끝납니다. `CLOUDFLARE_ACCOUNT_ID`는 이미 secret으로 넣어 두었습니다.
 
-| 이름 | 종류 | 값 |
+| 이름 | 종류 | 상태 |
 | --- | --- | --- |
-| `CLOUDFLARE_API_TOKEN` | secret | Cloudflare Pages:Edit 권한 토큰 |
-| `CLOUDFLARE_ACCOUNT_ID` | secret | `e84d5ee27e7b7e8fe46cb794c99a33fe` |
-| `VITE_CF_BEACON` | variable | Web Analytics 토큰 (선택) |
+| `CLOUDFLARE_ACCOUNT_ID` | secret | ✅ `e84d5ee27e7b7e8fe46cb794c99a33fe` |
+| `VITE_CF_BEACON` | variable | ✅ Web Analytics 토큰 |
+| `CLOUDFLARE_API_TOKEN` | secret | ⬜ 대시보드에서만 만들 수 있음 (아래) |
 
-저장소 수치 동기화 워크플로가 `src/data/stats.json`을 커밋하면 이 배포가 이어서 실행됩니다.
+토큰은 OAuth 로그인으로는 만들 수 없습니다(Cloudflare가 토큰 발급 API를 막아 둡니다).
+한 번만 손으로 만들면 됩니다:
+
+1. <https://dash.cloudflare.com/profile/api-tokens> → **Create Token** → *Create Custom Token*
+2. Permissions: **Account → Cloudflare Pages → Edit**
+3. Account Resources: 본인 계정
+4. Create → 값 복사 → 아래 실행
+
+```bash
+gh secret set CLOUDFLARE_API_TOKEN
+```
+
+넣은 뒤 `gh workflow run deploy.yml`로 한 번 확인하면, 이후로는 `main` 푸시와
+통계 동기화 커밋이 자동으로 배포됩니다.
 
 SPA 라우팅이 필요 없습니다. `/`와 `/en/`은 각각 실제 HTML 파일이라 새로고침·공유가 안전합니다.
 
