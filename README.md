@@ -96,14 +96,19 @@ SPA 라우팅이 필요 없습니다. `/`와 `/en/`은 각각 실제 HTML 파일
 
 ## 방문자 집계
 
-Cloudflare Web Analytics(쿠키·배너 없음)를 씁니다.
+Cloudflare Web Analytics(쿠키·배너 없음)를 씁니다. `cineforge-7ps.pages.dev` 사이트는 이미
+등록되어 있고, beacon 토큰은 아래 두 곳에 들어 있습니다.
 
-1. Cloudflare 대시보드 → **Web Analytics** → 사이트 추가 → beacon 토큰 복사
-2. Pages 프로젝트 → Settings → Environment variables에 `VITE_CF_BEACON` 추가
-3. 재배포하면 `src/lib/analytics.ts`가 beacon을 주입합니다(토큰이 없으면 아무 것도 하지 않음)
+| 위치 | 값 |
+| --- | --- |
+| `.env.local` (gitignore) | `VITE_CF_BEACON=...` — 로컬 `npm run deploy`용 |
+| GitHub repo variable `VITE_CF_BEACON` | Actions 배포용 |
 
-방문자·페이지뷰·국가·경로(/, /en/)는 Web Analytics 대시보드에서 확인합니다. 페이지 안에
-숫자를 노출하지는 않습니다 — 공개 API가 없고, 방문자에게 내부 지표를 보여줄 이유도 없습니다.
+- `src/lib/analytics.ts`가 토큰이 있을 때만 beacon을 주입합니다. 없으면 아무 것도 하지 않습니다.
+- 방문자·페이지뷰·국가·경로(`/`, `/en/`)는 Cloudflare 대시보드 → Web Analytics에서 봅니다.
+  사이트 목록: `cf rum site-info list`.
+- 페이지 안에 숫자를 노출하지는 않습니다 — 공개 조회 API가 없고, 방문자에게 내부 지표를
+  보여줄 이유도 없습니다.
 
 ## 저장소 수치 동기화 (별·포크·트래픽)
 
