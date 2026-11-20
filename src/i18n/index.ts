@@ -54,7 +54,7 @@ export function applyDocumentMeta(dict: Dict) {
   setMeta('meta[name="twitter:description"]', "content", dict.meta.ogDescription);
   const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (canonical) {
-    canonical.href = `https://cineforge.pages.dev${LANG_PATH[lang]}`;
+    canonical.href = `https://cineforge-7ps.pages.dev${LANG_PATH[lang]}`;
   }
 }
 

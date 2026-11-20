@@ -66,12 +66,31 @@ npm run lint     # oxlint
 
 ## 배포 (Cloudflare Pages)
 
-1. Cloudflare Pages → **Create project → Connect to Git** → 이 저장소 선택
-2. Build command `npm run build`, output directory `dist`
-3. 프로젝트 이름을 `cineforge`로 두면 `https://cineforge.pages.dev`가 됩니다.
-   (다른 이름을 쓰면 `index.html`·`en/index.html`·`public/sitemap.xml`·
-   `src/i18n/index.ts`의 canonical 도메인을 함께 바꾸세요.)
-4. `_headers`(보안 헤더·자산 캐시)와 `robots.txt`/`sitemap.xml`은 `public/`에서 그대로 배포됩니다.
+- 프로젝트: `cineforge` (Direct Upload)
+- 운영 URL: **https://cineforge-7ps.pages.dev** · 영어: **https://cineforge-7ps.pages.dev/en/**
+- `cineforge.pages.dev`는 이미 다른 계정이 쓰고 있어서 하위 도메인이 `-7ps`로 붙었습니다.
+  나중에 커스텀 도메인을 붙이면 `index.html` · `en/index.html` · `src/i18n/index.ts` ·
+  `public/sitemap.xml` · `public/robots.txt`의 도메인을 함께 바꾸세요.
+
+### 로컬에서 배포
+
+```bash
+npx wrangler login     # 브라우저 승인 (1회)
+npm run deploy         # build + pages deploy dist
+```
+
+### GitHub Actions 자동 배포
+
+`.github/workflows/deploy.yml`이 `main` 푸시마다 배포합니다. 아래 두 개가 있어야 동작하고,
+없으면 워크플로가 조용히 건너뜁니다.
+
+| 이름 | 종류 | 값 |
+| --- | --- | --- |
+| `CLOUDFLARE_API_TOKEN` | secret | Cloudflare Pages:Edit 권한 토큰 |
+| `CLOUDFLARE_ACCOUNT_ID` | secret | `e84d5ee27e7b7e8fe46cb794c99a33fe` |
+| `VITE_CF_BEACON` | variable | Web Analytics 토큰 (선택) |
+
+저장소 수치 동기화 워크플로가 `src/data/stats.json`을 커밋하면 이 배포가 이어서 실행됩니다.
 
 SPA 라우팅이 필요 없습니다. `/`와 `/en/`은 각각 실제 HTML 파일이라 새로고침·공유가 안전합니다.
 
