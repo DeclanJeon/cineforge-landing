@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..900&family=Gasoek+One&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <style>
+      :root {
+        --ink: #08090b;
+        --paper: #efe9dd;
+        --amber: #e9a93e;
+        --muted: #a7adb4;
+        --line: rgba(239, 233, 221, 0.14);
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: Archivo, sans-serif;
+        overflow: hidden;
+        position: relative;
+      }
+      /* projector haze */
+      body::before {
+        content: "";
+        position: absolute;
+        inset: -30% -10% auto -10%;
+        height: 90%;
+        background: radial-gradient(
+          60% 70% at 24% 0%,
+          rgba(233, 169, 62, 0.22),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      /* film sprocket rail */
+      .rail {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 34px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        padding: 0 34px;
+        opacity: 0.5;
+      }
+      .rail span {
+        width: 26px;
+        height: 12px;
+        border: 1px solid rgba(239, 233, 221, 0.32);
+        border-radius: 2px;
+      }
+      main {
+        position: relative;
+        padding: 84px 84px 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .kicker {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 17px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--amber);
+      }
+      h1 {
+        font-family: "Gasoek One", sans-serif;
+        font-weight: 400;
+        font-size: 96px;
+        line-height: 0.94;
+        letter-spacing: -0.02em;
+        margin-top: 34px;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--amber);
+      }
+      .lede {
+        margin-top: 22px;
+        font-size: 27px;
+        line-height: 1.45;
+        color: #d6d0c4;
+        max-width: 860px;
+        font-weight: 350;
+        letter-spacing: -0.01em;
+      }
+      footer {
+        position: absolute;
+        left: 84px;
+        right: 84px;
+        bottom: 54px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 16px;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+      footer strong {
+        color: var(--paper);
+        font-weight: 500;
+      }
+      footer .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--amber);
+      }
+      .mark {
+        position: absolute;
+        right: 84px;
+        top: 84px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        letter-spacing: 0.2em;
+        color: rgba(239, 233, 221, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rail">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span class="mark">CINEFORGE</span>
+    <main>
+      <p class="kicker">AI video orchestrator · v0.1.0</p>
+      <h1>요구사항 한 번,<br />선택 한 번.<br /><em>그다음은 논스톱.</em></h1>
+      <p class="lede">
+        콘셉트 조합부터 기획안·SSOT·에셋·검수·생성 인계까지<br />잇는 대화형 AI 영상 제작 CLI.
+      </p>
+      <footer>
+        <strong>15 stages</strong>
+        <span class="dot"></span>
+        <span>3 gates</span>
+        <span class="dot"></span>
+        <span>18 axes · 377 items</span>
+        <span class="dot"></span>
+        <span>51 offline tests</span>
+        <span class="dot"></span>
+        <span>python 3.10+</span>
+      </footer>
+    </main>
+  </body>
+</html>

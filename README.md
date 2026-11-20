@@ -179,3 +179,16 @@ en/index.html    영어 문서 (lang="en", 영어 메타)
 ## 라이선스
 
 [MIT](LICENSE) © 2026 Declan Jeon
+
+## 소셜 카드 (OG 이미지)
+
+`public/og.png`(1200×630)는 `scripts/og-card.html`을 실제로 렌더해서 만듭니다.
+페이지와 같은 폰트·색을 쓰기 때문에 미리보기가 사이트와 어긋나지 않습니다.
+
+```bash
+npm run og        # scripts/make-og.mjs → public/og.png
+```
+
+문구를 바꾸려면 `scripts/og-card.html`만 수정하고 다시 렌더하면 됩니다.
+`index.html`·`en/index.html`의 `og:image` / `twitter:image` / `og:image:alt`와
+JSON-LD(`SoftwareApplication`)도 함께 갱신되어 있습니다.
