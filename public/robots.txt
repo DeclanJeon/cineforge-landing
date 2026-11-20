@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cineforge.pages.dev/sitemap.xml

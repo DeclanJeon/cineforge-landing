@@ -1,0 +1,42 @@
+name: Sync repo stats
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [stats-updated]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-stats
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch stars, forks and traffic
+        env:
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
+        run: node .github/scripts/sync-stats.mjs
+
+      - name: Commit when the numbers moved
+        run: |
+          if [ -z "$(git status --porcelain src/data/stats.json)" ]; then
+            echo "stats unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/stats.json
+          git commit -m "chore(stats): sync repository numbers"
+          git push
