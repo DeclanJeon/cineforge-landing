@@ -29,7 +29,13 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
 fi
 
 git checkout --quiet main 2>/dev/null || true
-git merge --ff-only --quiet "origin/main" 2>/dev/null || git reset --hard --quiet "$TARGET"
+
+if ! git merge-base --is-ancestor HEAD "$TARGET" 2>/dev/null; then
+  log "local main carries commits that are not on origin — needs a human, skipped"
+  exit 0
+fi
+
+git merge --ff-only --quiet "$TARGET"
 
 [ -d node_modules ] || npm ci >>"$LOG" 2>&1
 
