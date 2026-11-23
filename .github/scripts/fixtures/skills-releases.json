@@ -1,0 +1,23 @@
+[
+  {
+    "tag_name": "v2.64",
+    "name": "Contents Production Skills 2.64",
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-11-23T19:03:12Z",
+    "html_url": "https://github.com/DeclanJeon/contents-production-skills/releases/tag/v2.64",
+    "body": "Adds a CineForge v1 pack adapter and verified file inventory. Stage owners, routes, and craft references can now be updated independently of CineForge. The adapter does not grant execution authority.\n\nDownload the installed pack archive and its SHA-256 file, verify the archive, extract it to a stable versioned directory, and set `CINEFORGE_SKILL_PACK` to the extracted `contents-production-skills-2.64` directory. Use `cineforge skills` with CineForge 0.1.4 or later to check the installation.",
+    "assets": [
+      {
+        "name": "contents-production-skills-2.64.sha256",
+        "size": 105,
+        "browser_download_url": "https://github.com/DeclanJeon/contents-production-skills/releases/download/v2.64/contents-production-skills-2.64.sha256"
+      },
+      {
+        "name": "contents-production-skills-2.64.tar.gz",
+        "size": 10169946,
+        "browser_download_url": "https://github.com/DeclanJeon/contents-production-skills/releases/download/v2.64/contents-production-skills-2.64.tar.gz"
+      }
+    ]
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "tag_name": "v9.0.0",
+    "name": "CineForge v9.0.0",
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-12-01T00:00:00Z",
+    "html_url": "https://github.com/DeclanJeon/cineforge/releases/tag/v9.0.0",
+    "body": "## 요약\n새 버전 <script>alert(1)</script>요약.\n\n## 새 기능\n- `skills update` 추가\n- **굵게** 항목\n\n## 수정\n- 버그 수정\n\n## 호환성\n- 스킬팩 2.65 이상\n\n## Summary\nNew version summary.\n\n## New\n- Added `skills update`\n\n## Fixed\n- Bug fix\n\n## Compatibility\n- Skill pack 2.65 or later\n",
+    "assets": []
+  },
+  {
+    "tag_name": "v0.1.4",
+    "name": "CineForge v0.1.4",
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-11-23T19:03:29Z",
+    "html_url": "https://github.com/DeclanJeon/cineforge/releases/tag/v0.1.4",
+    "body": "CineForge now reads installed v1 production skill packs. Existing projects keep their original pack pin; only new projects adopt a different compatible pack. Stage outputs, approvals, and execution authority remain under CineForge control. Projects created before pack pinning continue in legacy mode.\n\nInstall the wheel and [Contents Production Skills 2.64](https://github.com/DeclanJeon/contents-production-skills/releases/tag/v2.64). Set `CINEFORGE_SKILL_PACK` to the extracted skill pack root and confirm with `cineforge skills`. Keep older versioned pack directories for projects that are still in progress.",
+    "assets": [
+      {
+        "name": "cineforge-0.1.4-py3-none-any.whl",
+        "size": 194352,
+        "browser_download_url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.4/cineforge-0.1.4-py3-none-any.whl"
+      },
+      {
+        "name": "cineforge-0.1.4.sha256",
+        "size": 99,
+        "browser_download_url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.4/cineforge-0.1.4.sha256"
+      }
+    ]
+  },
+  {
+    "tag_name": "v0.1.2",
+    "name": "CineForge v0.1.2",
+    "draft": false,
+    "prerelease": true,
+    "published_at": "2026-11-23T17:23:39Z",
+    "html_url": "https://github.com/DeclanJeon/cineforge/releases/tag/v0.1.2",
+    "body": "Code-motion cut scoping, MP4 receipt validation, take selection, and playback-gated delivery. Requires the existing contents-production-skills code-motion tooling (0fafda5 or later).\n\nValidation: 182 tests passed, 2 skipped; the installed wheel passed the HTML-render-to-delivery integration fixture with simulated reviewer input. Real footage and human playback acceptance are pending.",
+    "assets": [
+      {
+        "name": "cineforge-0.1.2-py3-none-any.whl",
+        "size": 174774,
+        "browser_download_url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.2/cineforge-0.1.2-py3-none-any.whl"
+      }
+    ]
+  },
+  {
+    "tag_name": "v0.1.1",
+    "name": "CineForge v0.1.1",
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-11-23T16:53:14Z",
+    "html_url": "https://github.com/DeclanJeon/cineforge/releases/tag/v0.1.1",
+    "body": "New projects use a stable ASCII project ID instead of a prefix of the request.\n\n- Interactive CLI prompts for a project ID; non-interactive callers pass `--project-id`.\n- Host routing guides agents to choose a short English ID. Existing project folders and work titles are unchanged.\n- The CLI wheel includes routing evaluation data.",
+    "assets": [
+      {
+        "name": "cineforge-0.1.1-py3-none-any.whl",
+        "size": 171481,
+        "browser_download_url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.1/cineforge-0.1.1-py3-none-any.whl"
+      }
+    ]
+  }
+]

@@ -9,7 +9,9 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler@latest pages deploy dist --project-name cineforge --branch main",
-    "assets": "node scripts/make-assets.mjs"
+    "assets": "node scripts/make-assets.mjs",
+    "test": "node --test --experimental-strip-types \".github/scripts/**/*.test.mjs\" \"src/**/*.test.ts\"",
+    "sync:releases": "node .github/scripts/sync-releases.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
