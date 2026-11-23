@@ -298,7 +298,7 @@ export const ko = {
       { name: "로컬 모션 그래픽", cmd: "cineforge motion", desc: "비용 없이 텍스트·차트·카드 모션 컷을 로컬에서 렌더합니다." },
       { name: "사람의 검수", cmd: "cineforge verify", desc: "사람이 확인하고 VERIFY를 입력해야 결과가 승격됩니다." },
       { name: "검증된 납품", cmd: "cineforge deliver", desc: "게이트와 최종 검수(해시·길이·음량·자막)를 통과해야 납품 파일을 만듭니다." },
-      { name: "스킬팩 관리", cmd: "cineforge skills", desc: "체크섬을 확인해 설치하고, 프로젝트마다 쓴 팩 버전을 고정합니다." },
+      { name: "스킬팩 관리", cmd: "cineforge skills", desc: "설치된 스킬팩의 버전·파일 해시를 검사하고, 프로젝트마다 쓴 팩 버전을 고정합니다." },
     ],
     packTitle: "콘텐츠 제작 스킬팩 · 27개 스킬",
     groups: [
@@ -329,6 +329,12 @@ export const ko = {
     title: "시작하기",
     note: "설치부터 첫 스토리보드까지 네 단계입니다. 명령은 복사해서 그대로 쓸 수 있습니다.",
     copyFailed: "복사하지 못했습니다. 직접 선택해 복사하세요.",
+    manualSteps: [
+      { name: "CineForge 설치", desc: "Python 3.10 이상. 최신 릴리스의 wheel을 설치합니다.", cmd: "" },
+      { name: "스킬팩 설치", desc: "아래 다운로드 섹션에서 스킬팩을 받아 체크섬을 확인한 뒤, 버전별 폴더에 풀고 CineForge에 연결합니다.", cmd: "export CINEFORGE_SKILL_PACK=\"$HOME/.local/share/cineforge/skill-packs/contents-production-skills-<버전>\"\ncineforge skills" },
+      { name: "첫 프로젝트", desc: "스토리보드까지만 만드는 목표로 시작하면 생성 비용 없이 결과를 볼 수 있습니다.", cmd: "cineforge new \"15초 9:16 광고 스토리보드만\" --project-id demo --goal auto\ncineforge goal drive demo --json" },
+      { name: "업데이트", desc: "새 스킬팩은 새 폴더에 풀고 환경변수만 바꿉니다. 진행 중인 프로젝트는 고정한 팩 폴더를 지우지 않는 한 그대로 이어집니다.", cmd: "export CINEFORGE_SKILL_PACK=\"$HOME/.local/share/cineforge/skill-packs/contents-production-skills-<새 버전>\"" },
+    ],
     steps: [
       { name: "CineForge 설치", desc: "Python 3.10 이상. 최신 릴리스의 wheel을 설치합니다.", cmd: "" },
       { name: "스킬팩 설치", desc: "최신 스킬팩을 체크섬으로 검증한 뒤 버전별 폴더에 설치하고 연결 상태를 확인합니다.", cmd: "cineforge skills update --yes\ncineforge skills" },
@@ -348,6 +354,8 @@ export const ko = {
     verifyHint: "내려받은 폴더에서 실행합니다(macOS는 shasum -a 256 -c -).",
     cliLabel: "CineForge로 설치",
     cliHint: "CineForge를 쓴다면 이 명령 하나로 내려받기·검증·설치를 합니다.",
+    manualLabel: "압축 풀고 연결",
+    manualHint: "확인한 파일을 버전별 폴더에 풀고 CineForge에 연결합니다.",
   },
   changelog: {
     metaTitle: "개발노트 — CineForge",

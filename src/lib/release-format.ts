@@ -55,3 +55,15 @@ export function summaryBlocks(text: string): SummaryBlock[] {
   }
   return blocks;
 }
+
+/** True when dotted version `have` is at least `need` (missing counts as false). */
+export function atLeast(have: string | undefined, need: string) {
+  if (!have) return false;
+  const a = have.split(".").map(Number);
+  const b = need.split(".").map(Number);
+  for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
+    const d = (a[i] ?? 0) - (b[i] ?? 0);
+    if (d) return d > 0;
+  }
+  return true;
+}

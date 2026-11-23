@@ -1,5 +1,5 @@
 import { useDict } from "../i18n";
-import { releases } from "../data/releases";
+import { hasSkillUpdateCommand, releases } from "../data/releases";
 import { CopyBlock } from "./CopyBlock";
 import { SectionHead } from "./SectionHead";
 
@@ -12,13 +12,14 @@ function installCommand() {
 
 export function Guide() {
   const d = useDict();
-  const commands = [installCommand(), ...d.guide.steps.slice(1).map((s) => s.cmd)];
+  const steps = hasSkillUpdateCommand ? d.guide.steps : d.guide.manualSteps;
+  const commands = [installCommand(), ...steps.slice(1).map((s) => s.cmd)];
   return (
     <section className="guide" id="guide" aria-labelledby="guide-title">
       <div className="wrap">
         <SectionHead kicker={d.guide.kicker} title={d.guide.title} note={d.guide.note} id="guide-title" />
         <ol className="guide__steps">
-          {d.guide.steps.map((step, i) => (
+          {steps.map((step, i) => (
             <li className="guide__step" key={step.name}>
               <h3 className="guide__name">
                 <span className="mono guide__num">{i + 1}</span>

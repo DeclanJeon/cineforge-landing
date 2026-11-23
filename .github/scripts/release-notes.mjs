@@ -11,12 +11,19 @@ const SECTIONS = {
   en: { Summary: "summary", New: "added", Improved: "improved", Fixed: "fixed", Compatibility: "compat" },
 };
 
-/** Remove HTML; script/style blocks go with their content. */
+const HTML_TAGS =
+  "a|abbr|b|blockquote|br|code|del|details|div|em|h[1-6]|hr|i|iframe|img|input|kbd|li|object|ol|p|pre|s|small|span|strong|sub|summary|sup|table|tbody|td|th|thead|tr|u|ul|video|audio|source|embed|form|button|svg|style|script|link|meta";
+const TAG = new RegExp(`<\\/?(?:${HTML_TAGS})\\b[^>]*>`, "gi");
+
+/**
+ * Remove HTML; script/style blocks go with their content. Only real HTML tag
+ * names are stripped, so placeholders such as `<version>` or `<project>` stay.
+ */
 export function stripHtml(text) {
   return String(text)
     .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, "")
     .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<\/?[a-zA-Z][^>]*>/g, "");
+    .replace(TAG, "");
 }
 
 const emptyNotes = () => ({ summary: "", added: [], improved: [], fixed: [], compat: [] });

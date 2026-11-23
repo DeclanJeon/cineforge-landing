@@ -123,3 +123,30 @@ test("unchanged when equal", async () => {
   assert.equal(result, "unchanged");
   assert.equal(files.state.writes, 1);
 });
+
+test("keeps placeholders and code while stripping tags", () => {
+  assert.equal(
+    stripHtml("run `cineforge skills use <version>` <b>now</b> for <project>"),
+    "run `cineforge skills use <version>` now for <project>",
+  );
+});
+
+test("keeps file when a checksum download fails", async () => {
+  const files = io('{"old":true}');
+  const flaky = fakeFetch((url) => {
+    if (url.endsWith(".sha256")) return json({}, 503);
+    return goodFetch(url);
+  });
+  assert.equal(await syncReleases({ fetch: flaky, ...files, target: "x" }), "kept");
+  assert.equal(files.state.writes, 0);
+});
+
+test("keeps a product list that comes back empty", async () => {
+  const files = io(undefined);
+  await syncReleases({ fetch: goodFetch, ...files, target: "x" });
+  const skillsEmpty = fakeFetch((url) =>
+    url.includes("/repos/DeclanJeon/contents-production-skills/") ? json([]) : goodFetch(url),
+  );
+  assert.equal(await syncReleases({ fetch: skillsEmpty, ...files, target: "x" }), "unchanged");
+  assert.equal(JSON.parse(files.state.file).skills[0].version, "2.64");
+});

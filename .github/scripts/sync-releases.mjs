@@ -48,13 +48,12 @@ async function checksums(fetch, api) {
       (a) => a.name === checksumAssetName(asset.name) || a.name === `${asset.name}.sha256`,
     );
     if (!pair) continue;
-    try {
-      const text = await get(fetch, pair.browser_download_url, "text");
-      const hex = String(text).trim().split(/\s+/)[0];
-      if (/^[0-9a-f]{64}$/.test(hex)) out[asset.name] = hex;
-    } catch {
-      // No verified checksum -> no download button for this archive.
-    }
+    // A failed checksum download keeps the whole snapshot (Keep propagates), so a
+    // transient error never removes a live download button. A malformed file
+    // simply leaves that archive without a button.
+    const text = await get(fetch, pair.browser_download_url, "text");
+    const hex = String(text).trim().split(/\s+/)[0];
+    if (/^[0-9a-f]{64}$/.test(hex)) out[asset.name] = hex;
   }
   return out;
 }
@@ -97,6 +96,9 @@ export async function syncReleases({ fetch, readFile, writeFile, target }) {
   } catch {
     previous = null;
   }
+  // A product that suddenly lists nothing is treated as a bad answer for that product.
+  if (cineforge.length === 0 && previous?.cineforge?.length) cineforge = previous.cineforge;
+  if (skills.length === 0 && previous?.skills?.length) skills = previous.skills;
   const body = { cineforge, skills };
   if (previous && JSON.stringify({ cineforge: previous.cineforge, skills: previous.skills }) === JSON.stringify(body)) {
     return "unchanged";

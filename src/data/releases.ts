@@ -1,4 +1,5 @@
 import data from "./releases.json";
+import { atLeast } from "../lib/release-format";
 
 /** One language's release notes, parsed from the fixed release-body headings. */
 export type Notes = {
@@ -32,3 +33,8 @@ export function notesFor(release: Release, lang: "ko" | "en"): { notes: Notes; t
   if (own) return { notes: own, translated: false };
   return { notes: release.notes[release.notes.source] as Notes, translated: true };
 }
+
+/** `cineforge skills update/use/list` first shipped in CineForge 0.1.6. */
+export const SKILL_UPDATE_SINCE = "0.1.6";
+
+export const hasSkillUpdateCommand = atLeast(releases.cineforge[0]?.version, SKILL_UPDATE_SINCE);

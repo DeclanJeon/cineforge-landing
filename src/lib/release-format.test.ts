@@ -18,3 +18,12 @@ test("prose followed by bullets in one paragraph splits", () => {
     { kind: "ul", items: ["a", "b"] },
   ]);
 });
+
+import { atLeast } from "./release-format.ts";
+
+test("atLeast compares dotted versions numerically", () => {
+  assert.equal(atLeast("0.1.6", "0.1.6"), true);
+  assert.equal(atLeast("0.1.10", "0.1.6"), true);
+  assert.equal(atLeast("0.1.5", "0.1.6"), false);
+  assert.equal(atLeast(undefined, "0.1.6"), false);
+});

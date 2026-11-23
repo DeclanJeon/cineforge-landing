@@ -300,7 +300,7 @@ export const en: Dict = {
       { name: "Local motion graphics", cmd: "cineforge motion", desc: "Renders text, chart and card motion cuts locally at no cost." },
       { name: "Human review", cmd: "cineforge verify", desc: "Results are promoted only after a person checks them and types VERIFY." },
       { name: "Verified delivery", cmd: "cineforge deliver", desc: "Delivers only after gates and final QA (hashes, length, loudness, captions) pass." },
-      { name: "Skill pack management", cmd: "cineforge skills", desc: "Installs packs after a checksum check and pins the pack version per project." },
+      { name: "Skill pack management", cmd: "cineforge skills", desc: "Checks the installed pack version and file hashes and pins the pack version per project." },
     ],
     packTitle: "Content production skill pack · 27 skills",
     groups: [
@@ -331,6 +331,12 @@ export const en: Dict = {
     title: "Get started",
     note: "Four steps from install to your first storyboard. Every command can be copied as is.",
     copyFailed: "Copy failed. Select the text and copy it manually.",
+    manualSteps: [
+      { name: "Install CineForge", desc: "Python 3.10 or later. Installs the wheel from the latest release.", cmd: "" },
+      { name: "Install the skill pack", desc: "Download the pack in the section below, verify the checksum, extract it into a versioned folder and point CineForge at it.", cmd: "export CINEFORGE_SKILL_PACK=\"$HOME/.local/share/cineforge/skill-packs/contents-production-skills-<version>\"\ncineforge skills" },
+      { name: "First project", desc: "Start with a storyboard-only goal to see results with zero generation cost.", cmd: "cineforge new \"15s 9:16 ad, storyboard only\" --project-id demo --goal auto\ncineforge goal drive demo --json" },
+      { name: "Update", desc: "Extract a new pack into a new folder and change the variable. Projects in progress continue as long as their pinned pack folder stays.", cmd: "export CINEFORGE_SKILL_PACK=\"$HOME/.local/share/cineforge/skill-packs/contents-production-skills-<new version>\"" },
+    ],
     steps: [
       { name: "Install CineForge", desc: "Python 3.10 or later. Installs the wheel from the latest release.", cmd: "" },
       { name: "Install the skill pack", desc: "Verifies the latest pack by checksum, installs it into a versioned folder and checks the link.", cmd: "cineforge skills update --yes\ncineforge skills" },
@@ -350,6 +356,8 @@ export const en: Dict = {
     verifyHint: "Run in the download folder (on macOS use shasum -a 256 -c -).",
     cliLabel: "Install with CineForge",
     cliHint: "With CineForge, this one command downloads, verifies and installs it.",
+    manualLabel: "Extract and connect",
+    manualHint: "Extract the verified file into a versioned folder and point CineForge at it.",
   },
   changelog: {
     metaTitle: "Release notes — CineForge",
