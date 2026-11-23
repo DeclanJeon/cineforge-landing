@@ -139,6 +139,15 @@ Cloudflare Web Analytics(쿠키·배너 없음)를 씁니다. `cineforge-7ps.pag
 - 응답은 `sessionStorage`에 1분 캐시 → 비인증 API 한도(시간당 60회/IP)를 아낍니다.
 - API가 막히면 빌드에 박힌 값이 그대로 남습니다(크롤러·JS 없는 방문자 포함).
 
+## 개발노트·스킬팩 다운로드 동기화
+
+개발노트(`/changelog/`, `/en/changelog/`), 홈의 최근 업데이트·스킬팩 다운로드 섹션은 `src/data/releases.json` 하나에서 그린다. 이 파일은 [CineForge](https://github.com/DeclanJeon/cineforge/releases)와 [contents-production-skills](https://github.com/DeclanJeon/contents-production-skills/releases)의 **정식 GitHub 릴리스**(draft·prerelease 제외)에서 만든다.
+
+- 각 제품 저장소의 `release.yml`이 태그 push 시 릴리스를 발행하고 `repository_dispatch: release-published`를 보낸다(`LANDING_DISPATCH_TOKEN` 시크릿 필요, 없으면 매일 03:41 UTC 동기화가 반영).
+- `sync-releases.yml`이 `npm test` 후 `.github/scripts/sync-releases.mjs`를 실행하고, 바뀐 경우에만 커밋한 뒤 `deploy.yml`을 실행한다.
+- API 실패·레이트 리밋·빈 응답이면 기존 파일을 그대로 둔다. 스킬팩 아카이브는 `.sha256` 첨부물로 확인된 경우에만 다운로드 버튼이 나온다.
+- 릴리스 본문 형식은 각 제품 저장소의 `docs/release-notes.md`를 따른다. 로컬 갱신: `npm run sync:releases`.
+
 ## CTA 정책
 
 CineForge 저장소는 **공개**입니다. 그래서 외부 링크는 전부 저장소
