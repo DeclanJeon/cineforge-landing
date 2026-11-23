@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "../lib/gsap";
-import { LANG_PATH, lang, useDict } from "../i18n";
+import { CHANGELOG_PATH, LANG_PATH, homeHref, lang, useDict, type Page } from "../i18n";
 import { Aperture, ArrowRight, GitHubIcon } from "./Icons";
 
 const REPO = "https://github.com/DeclanJeon/cineforge";
@@ -47,8 +47,9 @@ export function Grain() {
   return <div className="grain" ref={ref} aria-hidden="true" />;
 }
 
-export function Chrome() {
+export function Chrome({ page = "home" }: { page?: Page }) {
   const d = useDict();
+  const langPaths = page === "changelog" ? CHANGELOG_PATH : LANG_PATH;
   const navRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const codeRef = useRef<HTMLSpanElement>(null);
@@ -95,7 +96,7 @@ export function Chrome() {
 
       <header className="nav" ref={navRef}>
         <div className="wrap nav__bar">
-          <a className="brand" href="#top">
+          <a className="brand" href={homeHref("#top", page)}>
             <Aperture />
             CineForge
             <span className="brand__sub">{d.nav.brandSub}</span>
@@ -103,7 +104,7 @@ export function Chrome() {
 
           <nav className="nav__links" aria-label="sections">
             {d.nav.links.map((link) => (
-              <a href={link.href} key={link.href}>
+              <a href={link.href.startsWith("/") ? link.href : homeHref(link.href, page)} key={link.href}>
                 {link.label}
               </a>
             ))}
@@ -111,12 +112,12 @@ export function Chrome() {
 
           <div className="nav__right">
             <div className="lang" role="group" aria-label={d.common.langLabel}>
-              {(Object.keys(LANG_PATH) as Array<keyof typeof LANG_PATH>).map(
+              {(Object.keys(langPaths) as Array<keyof typeof langPaths>).map(
                 (code) => (
                   <a
                     key={code}
                     className="lang__opt"
-                    href={LANG_PATH[code]}
+                    href={langPaths[code]}
                     aria-current={lang === code ? "true" : undefined}
                     hrefLang={code}
                   >
@@ -135,7 +136,7 @@ export function Chrome() {
               <GitHubIcon />
               {d.nav.access}
             </a>
-            <a className="btn btn--solid btn--sm" href="#start">
+            <a className="btn btn--solid btn--sm" href={homeHref("#start", page)}>
               {d.nav.start}
               <ArrowRight />
             </a>

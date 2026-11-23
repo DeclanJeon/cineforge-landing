@@ -11,6 +11,17 @@ export type Lang = "ko" | "en";
 /** Korean keeps the root path; English lives under /en/ (its own index.html). */
 export const LANG_PATH: Record<Lang, string> = { ko: "/", en: "/en/" };
 
+/** The full changelog lives beside each language root. */
+export const CHANGELOG_PATH: Record<Lang, string> = { ko: "/changelog/", en: "/en/changelog/" };
+
+export type Page = "home" | "changelog";
+
+/** In-page anchors (`#x`) on the home page; absolute home anchors elsewhere. */
+export function homeHref(href: string, page: Page, language: Lang = lang): string {
+  if (page === "home" || !href.startsWith("#")) return href;
+  return href === "#top" ? LANG_PATH[language] : `${LANG_PATH[language]}${href}`;
+}
+
 export function langFromPath(path: string): Lang {
   return /^\/en(\/|$)/.test(path) ? "en" : "ko";
 }
@@ -44,17 +55,20 @@ function setMeta(selector: string, attribute: string, value: string) {
 }
 
 /** Title, description and social cards follow the active language. */
-export function applyDocumentMeta(dict: Dict) {
+export function applyDocumentMeta(dict: Dict, page: Page = "home") {
   document.documentElement.lang = lang;
-  document.title = dict.meta.title;
-  setMeta('meta[name="description"]', "content", dict.meta.description);
+  const title = page === "changelog" ? dict.changelog.metaTitle : dict.meta.title;
+  const description = page === "changelog" ? dict.changelog.metaDescription : dict.meta.description;
+  document.title = title;
+  setMeta('meta[name="description"]', "content", description);
   setMeta('meta[property="og:title"]', "content", dict.meta.ogTitle);
   setMeta('meta[property="og:description"]', "content", dict.meta.ogDescription);
   setMeta('meta[name="twitter:title"]', "content", dict.meta.ogTitle);
   setMeta('meta[name="twitter:description"]', "content", dict.meta.ogDescription);
   const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (canonical) {
-    canonical.href = `https://cineforge-7ps.pages.dev${LANG_PATH[lang]}`;
+    const path = page === "changelog" ? CHANGELOG_PATH[lang] : LANG_PATH[lang];
+    canonical.href = `https://cineforge-7ps.pages.dev${path}`;
   }
 }
 

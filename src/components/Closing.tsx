@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { gsap, SplitText, useGSAP } from "../lib/gsap";
-import { useDict } from "../i18n";
+import { homeHref, useDict, type Page } from "../i18n";
 import { ArrowRight, CheckIcon, CopyIcon, GitHubIcon } from "./Icons";
 
 const REPO = "https://github.com/DeclanJeon/cineforge";
@@ -128,19 +128,26 @@ export function Closing() {
         </div>
       </section>
 
-      <footer className="wrap foot">
-        <span>{d.footer.copyright}</span>
-        <nav className="foot__links" aria-label={d.footer.navLabel}>
-          {d.footer.links.map((link) => (
-            <a href={link.href} key={link.href}>
-              {link.label}
-            </a>
-          ))}
-          <a href={REPO} target="_blank" rel="noreferrer">
-            {d.footer.access}
-          </a>
-        </nav>
-      </footer>
+      <Footer />
     </>
+  );
+}
+
+export function Footer({ page = "home" }: { page?: Page }) {
+  const d = useDict();
+  return (
+    <footer className="wrap foot">
+      <span>{d.footer.copyright}</span>
+      <nav className="foot__links" aria-label={d.footer.navLabel}>
+        {d.footer.links.map((link) => (
+          <a href={homeHref(link.href, page)} key={link.href}>
+            {link.label}
+          </a>
+        ))}
+        <a href={REPO} target="_blank" rel="noreferrer">
+          {d.footer.access}
+        </a>
+      </nav>
+    </footer>
   );
 }

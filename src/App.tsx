@@ -9,6 +9,7 @@ import { Terminal } from "./components/Terminal";
 import { Gate } from "./components/Gate";
 import { Sound } from "./components/Sound";
 import { Closing } from "./components/Closing";
+import { ChangelogPreview } from "./components/ChangelogPreview";
 import { useDict } from "./i18n";
 import { ScrollTrigger } from "./lib/gsap";
 
@@ -47,6 +48,7 @@ export default function App() {
         <Terminal />
         <Gate />
         <Sound />
+        <ChangelogPreview />
         <Closing />
       </main>
     </>

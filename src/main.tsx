@@ -5,6 +5,7 @@ import "./styles/base.css";
 import "./styles/hero.css";
 import "./styles/sections.css";
 import "./styles/sections-b.css";
+import "./styles/changelog.css";
 
 import App from "./App";
 import { applyDocumentMeta, dict } from "./i18n";

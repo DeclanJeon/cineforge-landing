@@ -12,6 +12,8 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         en: resolve(import.meta.dirname, 'en/index.html'),
+        changelog: resolve(import.meta.dirname, 'changelog/index.html'),
+        enChangelog: resolve(import.meta.dirname, 'en/changelog/index.html'),
       },
     },
   },
