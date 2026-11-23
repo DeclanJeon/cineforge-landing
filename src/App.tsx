@@ -10,6 +10,10 @@ import { Gate } from "./components/Gate";
 import { Sound } from "./components/Sound";
 import { Closing } from "./components/Closing";
 import { ChangelogPreview } from "./components/ChangelogPreview";
+import { Downloads } from "./components/Downloads";
+import { Features } from "./components/Features";
+import { Guide } from "./components/Guide";
+import { Workflow } from "./components/Workflow";
 import { useDict } from "./i18n";
 import { ScrollTrigger } from "./lib/gsap";
 
@@ -48,6 +52,10 @@ export default function App() {
         <Terminal />
         <Gate />
         <Sound />
+        <Features />
+        <Workflow />
+        <Guide />
+        <Downloads />
         <ChangelogPreview />
         <Closing />
       </main>

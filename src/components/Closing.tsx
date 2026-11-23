@@ -2,37 +2,10 @@ import { useRef, useState } from "react";
 import { gsap, SplitText, useGSAP } from "../lib/gsap";
 import { homeHref, useDict, type Page } from "../i18n";
 import { ArrowRight, CheckIcon, CopyIcon, GitHubIcon } from "./Icons";
+import { copyText } from "../lib/clipboard";
 
 const REPO = "https://github.com/DeclanJeon/cineforge";
 const INSTALL = 'pip install -e ".[dev]"';
-
-/** Clipboard API needs a focused, secure document; fall back for the rest. */
-async function copyText(value: string) {
-  try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(value);
-      return true;
-    }
-  } catch {
-    /* fall through to execCommand */
-  }
-
-  const field = document.createElement("textarea");
-  field.value = value;
-  field.setAttribute("readonly", "");
-  field.style.position = "fixed";
-  field.style.top = "-1000px";
-  field.style.opacity = "0";
-  document.body.appendChild(field);
-  field.select();
-  try {
-    return document.execCommand("copy");
-  } catch {
-    return false;
-  } finally {
-    document.body.removeChild(field);
-  }
-}
 
 export function Closing() {
   const d = useDict();

@@ -2,7 +2,7 @@ import type { Lang } from "../i18n";
 import { useDict } from "../i18n";
 import { notesFor, type Release } from "../data/releases";
 import { InlineMd } from "../lib/inline-md";
-import { formatDate, formatSize, releaseId } from "../lib/release-format";
+import { formatDate, formatSize, releaseId, summaryBlocks } from "../lib/release-format";
 import { ArrowRight } from "./Icons";
 
 function List({ title, items }: { title: string; items: string[] }) {
@@ -24,7 +24,6 @@ function List({ title, items }: { title: string; items: string[] }) {
 export function ReleaseCard({ release, lang }: { release: Release; lang: Lang }) {
   const d = useDict();
   const { notes, translated } = notesFor(release, lang);
-  const paragraphs = notes.summary.split(/\n\s*\n/).filter(Boolean);
 
   return (
     <article className="rel" id={releaseId(release)} aria-labelledby={`${releaseId(release)}-h`}>
@@ -42,11 +41,21 @@ export function ReleaseCard({ release, lang }: { release: Release; lang: Lang })
         </a>
       </header>
 
-      {paragraphs.map((p, i) => (
-        <p className="rel__summary" key={i}>
-          <InlineMd text={p.replace(/\s*\n\s*/g, " ")} />
-        </p>
-      ))}
+      {summaryBlocks(notes.summary).map((block, i) =>
+        block.kind === "p" ? (
+          <p className="rel__summary" key={i}>
+            <InlineMd text={block.text} />
+          </p>
+        ) : (
+          <ul className="rel__list rel__summary" key={i}>
+            {block.items.map((item, j) => (
+              <li key={j}>
+                <InlineMd text={item} />
+              </li>
+            ))}
+          </ul>
+        ),
+      )}
 
       <List title={d.changelog.added} items={notes.added} />
       <List title={d.changelog.improved} items={notes.improved} />
