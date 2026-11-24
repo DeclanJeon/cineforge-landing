@@ -1,6 +1,58 @@
 {
-  "updatedAt": "2026-11-23T21:27:48.487Z",
+  "updatedAt": "2026-11-24T16:21:56.527Z",
   "cineforge": [
+    {
+      "product": "cineforge",
+      "version": "0.1.7",
+      "date": "2026-11-24T10:49:04Z",
+      "url": "https://github.com/DeclanJeon/cineforge/releases/tag/v0.1.7",
+      "notes": {
+        "ko": {
+          "summary": "터미널에서 `cineforge`를 실행하면 설치된 AI 에이전트를 선택할 수 있습니다. Pi는 기존 설정과 사용 가능한 프로바이더를 그대로 사용합니다.",
+          "added": [
+            "Pi, Codex, Claude Code, agy(Antigravity CLI) 중 설치된 에이전트를 열 수 있습니다. Pi는 시작 모델을 강제하지 않으며, 세션 안에서 `/model`로 모델을 바꿀 수 있습니다.",
+            "새 프로젝트에서 영상·이미지·음성·음악·효과음·아바타 제작 서비스를 직접 선택할 수 있습니다. `cineforge services list`로 목록을 보고, `cineforge services setup`으로 지원되는 MCP의 등록 방법을 미리 확인할 수 있습니다."
+          ],
+          "improved": [],
+          "fixed": [
+            "화면에 나오지 않는 내레이션과 출연진이 없는 컷을 처리하고, 제작 전 검사와 음성 서비스 연결을 개선했습니다."
+          ],
+          "compat": [
+            "스킬팩 업데이트는 이전과 동일하게 `cineforge skills update`로 직접 실행합니다.",
+            "에이전트 CLI 설치와 로그인은 각 에이전트에서 관리합니다. 서비스 선택은 생성, 결제 또는 게시를 승인하지 않으며, 등록된 모든 서비스가 자동 생성에 연결되는 것은 아닙니다."
+          ]
+        },
+        "en": {
+          "summary": "Run `cineforge` in a terminal to choose an installed AI agent. Pi uses its existing settings and available providers without narrowing model selection.",
+          "added": [
+            "Launch Pi, Codex, Claude Code, or agy (Antigravity CLI) when installed. Pi keeps its usual startup model and lets you switch models with `/model`.",
+            "Choose video, image, voice, music, sound effect, and avatar services for new projects. Use `cineforge services list` to browse them and `cineforge services setup` to preview supported MCP registration."
+          ],
+          "improved": [],
+          "fixed": [
+            "Improved handling of off-screen narration and cuts with no cast, along with production preflight and voice routing."
+          ],
+          "compat": [
+            "Skill pack updates remain opt-in via `cineforge skills update`.",
+            "Each agent manages its own CLI installation and sign-in. Choosing a service does not authorize generation, spending, or publishing, and not every listed service has an automated generation adapter."
+          ]
+        },
+        "source": "ko"
+      },
+      "assets": [
+        {
+          "name": "cineforge-0.1.7-py3-none-any.whl",
+          "url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.7/cineforge-0.1.7-py3-none-any.whl",
+          "size": 220303
+        },
+        {
+          "name": "cineforge-0.1.7.tar.gz",
+          "url": "https://github.com/DeclanJeon/cineforge/releases/download/v0.1.7/cineforge-0.1.7.tar.gz",
+          "size": 269537
+        }
+      ],
+      "compat": "스킬팩 업데이트는 이전과 동일하게 `cineforge skills update`로 직접 실행합니다.\n에이전트 CLI 설치와 로그인은 각 에이전트에서 관리합니다. 서비스 선택은 생성, 결제 또는 게시를 승인하지 않으며, 등록된 모든 서비스가 자동 생성에 연결되는 것은 아닙니다."
+    },
     {
       "product": "cineforge",
       "version": "0.1.6",
@@ -148,6 +200,95 @@
     }
   ],
   "skills": [
+    {
+      "product": "skills",
+      "version": "2.66",
+      "date": "2026-11-24T13:18:32Z",
+      "url": "https://github.com/DeclanJeon/contents-production-skills/releases/tag/v2.66",
+      "notes": {
+        "ko": {
+          "summary": "스킬팩을 특정 실행기에 의존하지 않는 독립 패키지로 정리했습니다. 기존 제작 지침과 검수 절차는 유지합니다.",
+          "added": [],
+          "improved": [
+            "실행기 전용 스키마, 제출 스크립트, 단계 인계 명령을 제거했습니다. 스킬팩 탐색·장착·실행은 사용하는 도구가 맡습니다.",
+            "일반 스킬 설치와 배포 아카이브의 체크섬 검증은 그대로 지원합니다."
+          ],
+          "fixed": [],
+          "compat": [
+            "이전 버전의 전용 연동 규격을 요구하는 도구는 이 버전을 사용하려면 소비자 쪽 업데이트가 필요합니다. 이전에 고정한 스킬팩 버전은 그대로 사용할 수 있습니다."
+          ]
+        },
+        "en": {
+          "summary": "The skill pack is now standalone. The existing production craft and review procedures are preserved.",
+          "added": [],
+          "improved": [
+            "Removed consumer-specific schemas, submitters, and stage commands. Consumers own discovery, mounting, and execution.",
+            "Generic installation and release archive checksums remain available."
+          ],
+          "fixed": [],
+          "compat": [
+            "Consumers that require the old integration contract need a consumer-side update before using this version. Previously pinned pack versions remain available."
+          ]
+        },
+        "source": "ko"
+      },
+      "assets": [
+        {
+          "name": "contents-production-skills-2.66.tar.gz",
+          "url": "https://github.com/DeclanJeon/contents-production-skills/releases/download/v2.66/contents-production-skills-2.66.tar.gz",
+          "size": 10080658,
+          "sha256": "d5b387a52ed4563c2644c2a3d18d4963abebf3656075f1831d22c2f275d9f35b"
+        }
+      ],
+      "compat": "이전 버전의 전용 연동 규격을 요구하는 도구는 이 버전을 사용하려면 소비자 쪽 업데이트가 필요합니다. 이전에 고정한 스킬팩 버전은 그대로 사용할 수 있습니다."
+    },
+    {
+      "product": "skills",
+      "version": "2.65",
+      "date": "2026-11-24T10:36:30Z",
+      "url": "https://github.com/DeclanJeon/contents-production-skills/releases/tag/v2.65",
+      "notes": {
+        "ko": {
+          "summary": "한국어 자막, 토킹헤드 편집, 편집본 납품, 손그림 2D, 컷 경계 확인을 위한 선택 절차를 기존 제작 스킬에 추가했습니다.",
+          "added": [],
+          "improved": [
+            "한국어 발화의 로컬 자막 타이밍 초안을 만들고 최종 영상과 대조하는 절차를 추가했습니다.",
+            "토킹헤드 영상에서 말실수·중복 테이크를 골라내되 의도적인 쉼은 유지하고, 편집 후 경계를 다시 확인합니다.",
+            "수정 가능한 편집본은 대상 편집기에서 미디어 연결·컷·오디오 싱크를 확인하도록 했습니다.",
+            "손그림 2D의 노출표·레이어·이미지 시퀀스 인계와 전체 분해 없이 컷 후보만 확인하는 절차를 추가했습니다."
+          ],
+          "fixed": [],
+          "compat": [
+            "CineForge 0.1.4 이상을 지원합니다. 기존 실행·지출 승인 규칙은 그대로 유지되며 외부 도구를 자동 설치하지 않습니다.",
+            "아카이브와 SHA-256 파일을 내려받아 검증한 뒤 버전별 폴더에 풀고 `CINEFORGE_SKILL_PACK`을 그 폴더로 지정하세요."
+          ]
+        },
+        "en": {
+          "summary": "Adds optional guidance for Korean caption timing, talking-head cleanup, editable timeline delivery, hand-drawn 2D handoff, and cut-only detection.",
+          "added": [],
+          "improved": [
+            "Draft caption cues locally and check them against the locked edit.",
+            "Remove flubs without losing deliberate pauses, and verify edited boundaries against the source.",
+            "Reopen editable deliverables in the destination editor; pass exposure sheets and image sequences for hand-drawn animation; verify cut candidates against source frames."
+          ],
+          "fixed": [],
+          "compat": [
+            "Requires CineForge 0.1.4 or later. Existing approvals are unchanged, and external tools are not installed automatically.",
+            "Verify the downloaded archive against its SHA-256 file, extract it to a versioned directory, and point `CINEFORGE_SKILL_PACK` there."
+          ]
+        },
+        "source": "ko"
+      },
+      "assets": [
+        {
+          "name": "contents-production-skills-2.65.tar.gz",
+          "url": "https://github.com/DeclanJeon/contents-production-skills/releases/download/v2.65/contents-production-skills-2.65.tar.gz",
+          "size": 10116608,
+          "sha256": "93778a01f0012e03570c5fa2db5b3e9984eabca85f927bbfa5f42c070a2ce850"
+        }
+      ],
+      "compat": "CineForge 0.1.4 이상을 지원합니다. 기존 실행·지출 승인 규칙은 그대로 유지되며 외부 도구를 자동 설치하지 않습니다.\n아카이브와 SHA-256 파일을 내려받아 검증한 뒤 버전별 폴더에 풀고 `CINEFORGE_SKILL_PACK`을 그 폴더로 지정하세요."
+    },
     {
       "product": "skills",
       "version": "2.64",
