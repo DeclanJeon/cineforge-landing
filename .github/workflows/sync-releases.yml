@@ -3,12 +3,12 @@ name: Sync release notes
 # Rebuilds src/data/releases.json from the public GitHub releases of CineForge
 # and the content-production skill pack. Product repositories send
 # `release-published` right after publishing; the daily run is the fallback
-# when that dispatch token is not configured.
+# when that dispatch token is not configured (hourly, no secret needed).
 on:
   repository_dispatch:
     types: [release-published]
   schedule:
-    - cron: "41 3 * * *"
+    - cron: "41 * * * *"
   workflow_dispatch:
 
 permissions:
